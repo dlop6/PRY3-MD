@@ -1,0 +1,13 @@
+metadata;value
+indicator_id;4987
+indicator_name;Personas usuarias de Internet por grupo etario, países seleccionados América Latina y el Caribe, 2000 a 2022
+theme;Tecnologías de Información y Comunicación
+area;Uso individual de TIC
+note;"El uso de Internet se miden en Argentina a partir de los 4 años de edad, en  Bolivia (Est. Plur.de), Chile, Colombia, Costa Rica Ecuador y Honduras a partir de los 5 años de edad; en Uruguay y Perú a partir de los 6 aos y en Brasil, El Salvador, Panamá y Paraguay de los 10 años de edad."
+unit;Porcentaje sobre el total de personas en cada grupo etario
+data_features;
+definition;Personas usuarias de Internet por grupo etario. El cálculo se hace sobre la población de cada grupo. Se incluye el uso de Internet desde cualquier lugar, a través de cualquier dispositivo y conexión (fija o móvil).
+calculation_methodology;100*(Cantidad de usuarios de Internet en cada grupo de edad/Total de personas en cada grupo de edad)
+comments;
+decimals;0
+last_update;May 19 2025  2:37PM
