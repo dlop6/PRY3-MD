@@ -105,12 +105,12 @@ El listado completo con número de registros por país se genera en la **Secció
 
 ## 6. Años disponibles
 
-El rango general del dataset es **2006–2022**, pero la cobertura **no es uniforme** entre países:
+El rango general del dataset es **2000–2022**, pero la cobertura **no es uniforme** entre países:
 
-- Algunos países tienen datos desde **2006 o 2008** (ej. Uruguay).
-- Otros solo cuentan con datos desde **2009 o 2012** (ej. Bolivia).
-- El año más reciente varía: Argentina llega a 2022; Uruguay solo a 2019.
-- El número total de años distintos en el dataset es aproximadamente **17**.
+- Algunos países tienen datos desde los primeros años de la década de 2000.
+- Otros solo cuentan con cobertura más tardía y esporádica.
+- El año más reciente varía según país.
+- El número total de años distintos en el dataset es aproximadamente **21**.
 
 Esta heterogeneidad genera un **panel desbalanceado** que debe ser tratado en el preprocesamiento. El análisis de cobertura temporal por país se realiza en la **Sección 6** del notebook.
 
