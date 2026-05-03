@@ -1,0 +1,126 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=2.5cm}
+\setlist[itemize]{itemsep=0.35em, topsep=0.35em}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+
+\title{Informe de Semana 1}
+\author{PRY3-MD}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Descripción del conjunto de datos}
+
+El conjunto de datos analiza el uso de Internet en países seleccionados de América Latina y el Caribe entre 2000 y 2022. La unidad de análisis combina tres dimensiones principales y una variable continua de interés:
+
+\begin{itemize}
+    \item País.
+    \item Año.
+    \item Grupo etario.
+    \item \textbf{Variable de interés:} porcentaje de personas usuarias de Internet (\texttt{value}).
+\end{itemize}
+
+Esta variable representa el porcentaje de personas usuarias de Internet sobre el total de personas en cada grupo etario. El archivo también contiene columnas de contexto como \texttt{indicator}, \texttt{unit}, \texttt{notes\_ids} y \texttt{source\_id}, útiles para trazabilidad, pero no como variables predictoras directas en un modelo.
+
+\section{EDA inicial}
+
+El análisis exploratorio realizado en el notebook \texttt{notebooks/01\_semana1\_eda.ipynb} muestra un comportamiento consistente con un proceso de adopción digital en expansión:
+
+\begin{itemize}
+    \item La distribución global del porcentaje es aproximadamente simétrica, con media y mediana cercanas a 44\%.
+    \item El rango observado va de 0\% a 97\%, lo que refleja una variabilidad amplia entre países, años y grupos etarios.
+    \item En la comparación entre países, Uruguay, Argentina y Chile aparecen como los valores más altos, con niveles superiores al 70\% en varios cortes.
+    \item La evolución temporal global muestra un crecimiento fuerte, pasando de niveles cercanos al 15\% en 2000 a alrededor del 72\% en 2022.
+    \item La cobertura mejora notablemente a partir de 2016, donde el panel se vuelve mucho más confiable y homogéneo.
+    \item Existe una brecha generacional clara: el grupo de 18 a 25 años presenta valores cercanos al 65\%, mientras que el grupo de 66 años o más se ubica alrededor del 20\%.
+\end{itemize}
+
+En conjunto, el EDA sugiere que el fenómeno está bien definido, tiene tendencia temporal visible y presenta diferencias claras por país y por edad.
+
+\section{Problemas de datos identificados}
+
+Se identificaron varios puntos críticos que conviene considerar antes de modelar:
+
+\begin{itemize}
+    \item \textbf{Completitud:} Con 14 países, 21 años y 5 grupos etarios, la completitud es de 49.3\% (725 combinaciones reales de 1470 posibles), reflejando un panel desbalanceado donde no todos los países tienen datos para todos los años.
+    \item \textbf{Duplicados:} No se detectaron duplicados exactos en el dataset, lo que indica buena integridad de datos.
+    \item \textbf{Outliers:} Presencia mínima de valores atípicos (3.4\% en el grupo 18--25 años, 6.9\% en el grupo 66+), principalmente en los extremos del rango etario.
+    \item \textbf{Cobertura temporal:} Menor confiabilidad en los años iniciales, especialmente antes de 2016. Post-2016 el panel es más homogéneo.
+    \item \textbf{Formato:} Dataset en formato largo que exige reestructuración (pivotaje o agregación) según el objetivo analítico.
+    \item \textbf{Variables de contexto:} Columnas como \texttt{indicator}, \texttt{unit} y \texttt{source\_id} no aportan señal directa al modelado sin tratamiento previo.
+\end{itemize}
+
+\noindent \textbf{Conclusión sobre calidad:} El dataset presenta buena integridad estructural (sin duplicados, variables clave íntegras). El principal limitante es el desbalance temporal. La restricción a datos post-2016 mejoraría significativamente la confiabilidad para modelado predictivo.
+
+\section{Problemas potenciales de Data Mining}
+
+\subsection{Problema 1: Predicción del porcentaje de uso de Internet}
+
+\begin{itemize}
+    \item Tipo de problema: regresión.
+    \item Qué resolvería: estimar el porcentaje de personas usuarias de Internet para una combinación de país, año y grupo etario.
+    \item Variable objetivo: \texttt{value}.
+    \item Transformaciones requeridas:
+    \begin{itemize}
+        \item Filtrar el grupo \texttt{Total} si se busca modelar solo los grupos etarios específicos.
+        \item Codificar país y grupo etario.
+        \item Construir variables temporales, por ejemplo el año como variable numérica o con retardos.
+        \item Tratar los años faltantes o series incompletas.
+        \item Separar entrenamiento y prueba respetando el orden temporal para evitar fuga de información.
+    \end{itemize}
+\end{itemize}
+
+Este problema es útil porque el objetivo es continuo, el dataset tiene una tendencia clara y el comportamiento temporal ofrece señal suficiente para aprender patrones.
+
+\subsection{Problema 2: Segmentación de países o grupos etarios según su patrón de adopción}
+
+\begin{itemize}
+    \item Tipo de problema: clustering.
+    \item Qué resolvería: agrupar países o grupos etarios con trayectorias similares de adopción de Internet.
+    \item Variable objetivo: no aplica.
+    \item Transformaciones requeridas:
+    \begin{itemize}
+        \item Pasar de formato largo a una matriz país-año o grupo-año.
+        \item Estandarizar las series para comparar forma de crecimiento y no solo nivel absoluto.
+        \item Reducir dimensionalidad si el vector temporal es muy amplio.
+        \item Definir una métrica adecuada para comparar trayectorias.
+    \end{itemize}
+\end{itemize}
+
+Este enfoque serviría para encontrar perfiles de adopción, pero no entrega una predicción directa del porcentaje final.
+
+\section{Problema seleccionado}
+
+El problema final a resolver será la \textbf{regresión para estimar el porcentaje de uso de Internet por país, año y grupo etario}.
+
+\subsection{Justificación}
+
+Se eligió este problema por tres razones principales:
+
+\begin{enumerate}
+    \item El EDA muestra una variable objetivo continua, clara y bien interpretada.
+    \item La señal temporal y la diferencia entre países y grupos etarios hacen viable un modelo supervisado con información útil.
+    \item La calidad del dato es razonable, sobre todo desde 2016, donde la cobertura mejora y las tendencias son más consistentes.
+\end{enumerate}
+
+La clasificación no se prioriza porque requeriría discretizar artificialmente una variable continua, perdiendo información. El clustering sigue siendo útil como análisis complementario, pero no como objetivo principal del entregable por su menor capacidad de validación directa.
+
+\section{Conclusión}
+
+El conjunto de datos representa un caso sólido para analítica descriptiva y modelado predictivo básico sobre adopción digital. El comportamiento general es coherente, la brecha generacional es clara y la evolución temporal ofrece suficiente estructura para construir un primer modelo de regresión con buena viabilidad.
+
+\section{Respaldo técnico}
+
+El análisis exploratorio de respaldo se encuentra en \texttt{notebooks/01\_semana1\_eda.ipynb}.
+
+\end{document}
