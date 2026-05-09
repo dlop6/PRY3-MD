@@ -1,0 +1,341 @@
+pais,año,grupo_etario,porcentaje_internet,years_since_2016,grupo_18 a 25 años de edad,grupo_26 a 50 años de edad,grupo_51 a 65 años,grupo_66 años en adelante,grupo_edad de medicion a 17 años
+Argentina,2016,edad de medicion a 17 años,76.0,0,0,0,0,0,1
+Argentina,2017,edad de medicion a 17 años,76.0,1,0,0,0,0,1
+Argentina,2018,edad de medicion a 17 años,79.0,2,0,0,0,0,1
+Argentina,2019,edad de medicion a 17 años,79.0,3,0,0,0,0,1
+Argentina,2020,edad de medicion a 17 años,88.0,4,0,0,0,0,1
+Argentina,2021,edad de medicion a 17 años,87.0,5,0,0,0,0,1
+Argentina,2022,edad de medicion a 17 años,87.0,6,0,0,0,0,1
+Argentina,2016,18 a 25 años de edad,86.0,0,1,0,0,0,0
+Argentina,2017,18 a 25 años de edad,90.0,1,1,0,0,0,0
+Argentina,2018,18 a 25 años de edad,90.0,2,1,0,0,0,0
+Argentina,2019,18 a 25 años de edad,92.0,3,1,0,0,0,0
+Argentina,2020,18 a 25 años de edad,95.0,4,1,0,0,0,0
+Argentina,2021,18 a 25 años de edad,95.0,5,1,0,0,0,0
+Argentina,2022,18 a 25 años de edad,97.0,6,1,0,0,0,0
+Argentina,2016,26 a 50 años de edad,82.0,0,0,1,0,0,0
+Argentina,2017,26 a 50 años de edad,86.0,1,0,1,0,0,0
+Argentina,2018,26 a 50 años de edad,88.0,2,0,1,0,0,0
+Argentina,2019,26 a 50 años de edad,90.0,3,0,1,0,0,0
+Argentina,2020,26 a 50 años de edad,92.0,4,0,1,0,0,0
+Argentina,2021,26 a 50 años de edad,94.0,5,0,1,0,0,0
+Argentina,2022,26 a 50 años de edad,95.0,6,0,1,0,0,0
+Argentina,2016,51 a 65 años,61.0,0,0,0,1,0,0
+Argentina,2017,51 a 65 años,68.0,1,0,0,1,0,0
+Argentina,2018,51 a 65 años,74.0,2,0,0,1,0,0
+Argentina,2019,51 a 65 años,77.0,3,0,0,1,0,0
+Argentina,2020,51 a 65 años,81.0,4,0,0,1,0,0
+Argentina,2021,51 a 65 años,87.0,5,0,0,1,0,0
+Argentina,2022,51 a 65 años,88.0,6,0,0,1,0,0
+Argentina,2016,66 años en adelante,29.0,0,0,0,0,1,0
+Argentina,2017,66 años en adelante,34.0,1,0,0,0,1,0
+Argentina,2018,66 años en adelante,40.0,2,0,0,0,1,0
+Argentina,2019,66 años en adelante,46.0,3,0,0,0,1,0
+Argentina,2020,66 años en adelante,55.0,4,0,0,0,1,0
+Argentina,2021,66 años en adelante,57.0,5,0,0,0,1,0
+Argentina,2022,66 años en adelante,63.0,6,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2016,edad de medicion a 17 años,34.0,0,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2017,edad de medicion a 17 años,27.0,1,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2018,edad de medicion a 17 años,35.0,2,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2019,edad de medicion a 17 años,33.0,3,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2020,edad de medicion a 17 años,56.0,4,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2021,edad de medicion a 17 años,68.0,5,0,0,0,0,1
+Bolivia (Estado Plurinacional de),2016,18 a 25 años de edad,73.0,0,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2017,18 a 25 años de edad,66.0,1,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2018,18 a 25 años de edad,78.0,2,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2019,18 a 25 años de edad,79.0,3,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2020,18 a 25 años de edad,84.0,4,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2021,18 a 25 años de edad,86.0,5,1,0,0,0,0
+Bolivia (Estado Plurinacional de),2016,26 a 50 años de edad,45.0,0,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2017,26 a 50 años de edad,45.0,1,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2018,26 a 50 años de edad,55.0,2,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2019,26 a 50 años de edad,60.0,3,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2020,26 a 50 años de edad,73.0,4,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2021,26 a 50 años de edad,73.0,5,0,1,0,0,0
+Bolivia (Estado Plurinacional de),2016,51 a 65 años,18.0,0,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2017,51 a 65 años,17.0,1,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2018,51 a 65 años,23.0,2,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2019,51 a 65 años,30.0,3,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2020,51 a 65 años,40.0,4,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2021,51 a 65 años,45.0,5,0,0,1,0,0
+Bolivia (Estado Plurinacional de),2016,66 años en adelante,5.0,0,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2017,66 años en adelante,5.0,1,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2018,66 años en adelante,8.0,2,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2019,66 años en adelante,12.0,3,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2020,66 años en adelante,17.0,4,0,0,0,1,0
+Bolivia (Estado Plurinacional de),2021,66 años en adelante,21.0,5,0,0,0,1,0
+Chile,2017,edad de medicion a 17 años,84.0,1,0,0,0,0,1
+Chile,2017,18 a 25 años de edad,94.0,1,1,0,0,0,0
+Chile,2017,26 a 50 años de edad,86.0,1,0,1,0,0,0
+Chile,2017,51 a 65 años,58.0,1,0,0,1,0,0
+Chile,2017,66 años en adelante,23.0,1,0,0,0,1,0
+Colombia,2016,edad de medicion a 17 años,69.0,0,0,0,0,0,1
+Colombia,2018,edad de medicion a 17 años,66.0,2,0,0,0,0,1
+Colombia,2019,edad de medicion a 17 años,67.0,3,0,0,0,0,1
+Colombia,2020,edad de medicion a 17 años,74.0,4,0,0,0,0,1
+Colombia,2021,edad de medicion a 17 años,78.0,5,0,0,0,0,1
+Colombia,2022,edad de medicion a 17 años,72.0,6,0,0,0,0,1
+Colombia,2016,18 a 25 años de edad,80.0,0,1,0,0,0,0
+Colombia,2018,18 a 25 años de edad,83.0,2,1,0,0,0,0
+Colombia,2019,18 a 25 años de edad,83.0,3,1,0,0,0,0
+Colombia,2020,18 a 25 años de edad,84.0,4,1,0,0,0,0
+Colombia,2021,18 a 25 años de edad,87.0,5,1,0,0,0,0
+Colombia,2022,18 a 25 años de edad,88.0,6,1,0,0,0,0
+Colombia,2016,26 a 50 años de edad,62.0,0,0,1,0,0,0
+Colombia,2018,26 a 50 años de edad,71.0,2,0,1,0,0,0
+Colombia,2019,26 a 50 años de edad,74.0,3,0,1,0,0,0
+Colombia,2020,26 a 50 años de edad,78.0,4,0,1,0,0,0
+Colombia,2021,26 a 50 años de edad,81.0,5,0,1,0,0,0
+Colombia,2022,26 a 50 años de edad,83.0,6,0,1,0,0,0
+Colombia,2016,51 a 65 años,34.0,0,0,0,1,0,0
+Colombia,2018,51 a 65 años,48.0,2,0,0,1,0,0
+Colombia,2019,51 a 65 años,50.0,3,0,0,1,0,0
+Colombia,2020,51 a 65 años,57.0,4,0,0,1,0,0
+Colombia,2021,51 a 65 años,61.0,5,0,0,1,0,0
+Colombia,2022,51 a 65 años,62.0,6,0,0,1,0,0
+Colombia,2016,66 años en adelante,10.0,0,0,0,0,1,0
+Colombia,2018,66 años en adelante,21.0,2,0,0,0,1,0
+Colombia,2019,66 años en adelante,22.0,3,0,0,0,1,0
+Colombia,2020,66 años en adelante,29.0,4,0,0,0,1,0
+Colombia,2021,66 años en adelante,32.0,5,0,0,0,1,0
+Colombia,2022,66 años en adelante,33.0,6,0,0,0,1,0
+Costa Rica,2016,edad de medicion a 17 años,67.0,0,0,0,0,0,1
+Costa Rica,2017,edad de medicion a 17 años,72.0,1,0,0,0,0,1
+Costa Rica,2018,edad de medicion a 17 años,71.0,2,0,0,0,0,1
+Costa Rica,2019,edad de medicion a 17 años,78.0,3,0,0,0,0,1
+Costa Rica,2020,edad de medicion a 17 años,80.0,4,0,0,0,0,1
+Costa Rica,2021,edad de medicion a 17 años,82.0,5,0,0,0,0,1
+Costa Rica,2022,edad de medicion a 17 años,78.0,6,0,0,0,0,1
+Costa Rica,2016,18 a 25 años de edad,86.0,0,1,0,0,0,0
+Costa Rica,2017,18 a 25 años de edad,91.0,1,1,0,0,0,0
+Costa Rica,2018,18 a 25 años de edad,91.0,2,1,0,0,0,0
+Costa Rica,2019,18 a 25 años de edad,96.0,3,1,0,0,0,0
+Costa Rica,2020,18 a 25 años de edad,94.0,4,1,0,0,0,0
+Costa Rica,2021,18 a 25 años de edad,95.0,5,1,0,0,0,0
+Costa Rica,2022,18 a 25 años de edad,94.0,6,1,0,0,0,0
+Costa Rica,2016,26 a 50 años de edad,77.0,0,0,1,0,0,0
+Costa Rica,2017,26 a 50 años de edad,83.0,1,0,1,0,0,0
+Costa Rica,2018,26 a 50 años de edad,86.0,2,0,1,0,0,0
+Costa Rica,2019,26 a 50 años de edad,94.0,3,0,1,0,0,0
+Costa Rica,2020,26 a 50 años de edad,91.0,4,0,1,0,0,0
+Costa Rica,2021,26 a 50 años de edad,92.0,5,0,1,0,0,0
+Costa Rica,2022,26 a 50 años de edad,92.0,6,0,1,0,0,0
+Costa Rica,2016,51 a 65 años,50.0,0,0,0,1,0,0
+Costa Rica,2017,51 a 65 años,59.0,1,0,0,1,0,0
+Costa Rica,2018,51 a 65 años,64.0,2,0,0,1,0,0
+Costa Rica,2019,51 a 65 años,76.0,3,0,0,1,0,0
+Costa Rica,2020,51 a 65 años,76.0,4,0,0,1,0,0
+Costa Rica,2021,51 a 65 años,80.0,5,0,0,1,0,0
+Costa Rica,2022,51 a 65 años,83.0,6,0,0,1,0,0
+Costa Rica,2016,66 años en adelante,18.0,0,0,0,0,1,0
+Costa Rica,2017,66 años en adelante,24.0,1,0,0,0,1,0
+Costa Rica,2018,66 años en adelante,27.0,2,0,0,0,1,0
+Costa Rica,2019,66 años en adelante,37.0,3,0,0,0,1,0
+Costa Rica,2020,66 años en adelante,39.0,4,0,0,0,1,0
+Costa Rica,2021,66 años en adelante,46.0,5,0,0,0,1,0
+Costa Rica,2022,66 años en adelante,51.0,6,0,0,0,1,0
+Ecuador,2016,edad de medicion a 17 años,66.0,0,0,0,0,0,1
+Ecuador,2017,edad de medicion a 17 años,65.0,1,0,0,0,0,1
+Ecuador,2018,edad de medicion a 17 años,54.0,2,0,0,0,0,1
+Ecuador,2019,edad de medicion a 17 años,54.0,3,0,0,0,0,1
+Ecuador,2016,18 a 25 años de edad,80.0,0,1,0,0,0,0
+Ecuador,2017,18 a 25 años de edad,83.0,1,1,0,0,0,0
+Ecuador,2018,18 a 25 años de edad,82.0,2,1,0,0,0,0
+Ecuador,2019,18 a 25 años de edad,85.0,3,1,0,0,0,0
+Ecuador,2016,26 a 50 años de edad,57.0,0,0,1,0,0,0
+Ecuador,2017,26 a 50 años de edad,63.0,1,0,1,0,0,0
+Ecuador,2018,26 a 50 años de edad,68.0,2,0,1,0,0,0
+Ecuador,2019,26 a 50 años de edad,73.0,3,0,1,0,0,0
+Ecuador,2016,51 a 65 años,27.0,0,0,0,1,0,0
+Ecuador,2017,51 a 65 años,30.0,1,0,0,1,0,0
+Ecuador,2018,51 a 65 años,39.0,2,0,0,1,0,0
+Ecuador,2019,51 a 65 años,46.0,3,0,0,1,0,0
+Ecuador,2016,66 años en adelante,7.0,0,0,0,0,1,0
+Ecuador,2017,66 años en adelante,7.0,1,0,0,0,1,0
+Ecuador,2018,66 años en adelante,14.0,2,0,0,0,1,0
+Ecuador,2019,66 años en adelante,16.0,3,0,0,0,1,0
+El Salvador,2016,edad de medicion a 17 años,41.0,0,0,0,0,0,1
+El Salvador,2017,edad de medicion a 17 años,45.0,1,0,0,0,0,1
+El Salvador,2018,edad de medicion a 17 años,48.0,2,0,0,0,0,1
+El Salvador,2019,edad de medicion a 17 años,58.0,3,0,0,0,0,1
+El Salvador,2016,18 a 25 años de edad,45.0,0,1,0,0,0,0
+El Salvador,2017,18 a 25 años de edad,55.0,1,1,0,0,0,0
+El Salvador,2018,18 a 25 años de edad,63.0,2,1,0,0,0,0
+El Salvador,2019,18 a 25 años de edad,73.0,3,1,0,0,0,0
+El Salvador,2016,26 a 50 años de edad,26.0,0,0,1,0,0,0
+El Salvador,2017,26 a 50 años de edad,34.0,1,0,1,0,0,0
+El Salvador,2018,26 a 50 años de edad,44.0,2,0,1,0,0,0
+El Salvador,2019,26 a 50 años de edad,56.0,3,0,1,0,0,0
+El Salvador,2016,51 a 65 años,12.0,0,0,0,1,0,0
+El Salvador,2017,51 a 65 años,15.0,1,0,0,1,0,0
+El Salvador,2018,51 a 65 años,22.0,2,0,0,1,0,0
+El Salvador,2019,51 a 65 años,31.0,3,0,0,1,0,0
+El Salvador,2016,66 años en adelante,3.0,0,0,0,0,1,0
+El Salvador,2017,66 años en adelante,4.0,1,0,0,0,1,0
+El Salvador,2018,66 años en adelante,8.0,2,0,0,0,1,0
+El Salvador,2019,66 años en adelante,13.0,3,0,0,0,1,0
+Honduras,2016,edad de medicion a 17 años,24.0,0,0,0,0,0,1
+Honduras,2018,edad de medicion a 17 años,28.0,2,0,0,0,0,1
+Honduras,2019,edad de medicion a 17 años,27.0,3,0,0,0,0,1
+Honduras,2016,18 a 25 años de edad,51.0,0,1,0,0,0,0
+Honduras,2018,18 a 25 años de edad,60.0,2,1,0,0,0,0
+Honduras,2019,18 a 25 años de edad,62.0,3,1,0,0,0,0
+Honduras,2016,26 a 50 años de edad,33.0,0,0,1,0,0,0
+Honduras,2018,26 a 50 años de edad,43.0,2,0,1,0,0,0
+Honduras,2019,26 a 50 años de edad,51.0,3,0,1,0,0,0
+Honduras,2016,51 a 65 años,14.0,0,0,0,1,0,0
+Honduras,2018,51 a 65 años,25.0,2,0,0,1,0,0
+Honduras,2019,51 a 65 años,30.0,3,0,0,1,0,0
+Honduras,2016,66 años en adelante,4.0,0,0,0,0,1,0
+Honduras,2018,66 años en adelante,8.0,2,0,0,0,1,0
+Honduras,2019,66 años en adelante,12.0,3,0,0,0,1,0
+México,2016,edad de medicion a 17 años,59.0,0,0,0,0,0,1
+México,2017,edad de medicion a 17 años,64.0,1,0,0,0,0,1
+México,2018,edad de medicion a 17 años,64.0,2,0,0,0,0,1
+México,2019,edad de medicion a 17 años,70.0,3,0,0,0,0,1
+México,2020,edad de medicion a 17 años,73.0,4,0,0,0,0,1
+México,2021,edad de medicion a 17 años,77.0,5,0,0,0,0,1
+México,2022,edad de medicion a 17 años,79.0,6,0,0,0,0,1
+México,2016,18 a 25 años de edad,65.0,0,1,0,0,0,0
+México,2017,18 a 25 años de edad,71.0,1,1,0,0,0,0
+México,2018,18 a 25 años de edad,71.0,2,1,0,0,0,0
+México,2019,18 a 25 años de edad,76.0,3,1,0,0,0,0
+México,2020,18 a 25 años de edad,77.0,4,1,0,0,0,0
+México,2021,18 a 25 años de edad,81.0,5,1,0,0,0,0
+México,2022,18 a 25 años de edad,84.0,6,1,0,0,0,0
+México,2016,26 a 50 años de edad,63.0,0,0,1,0,0,0
+México,2017,26 a 50 años de edad,68.0,1,0,1,0,0,0
+México,2018,26 a 50 años de edad,68.0,2,0,1,0,0,0
+México,2019,26 a 50 años de edad,74.0,3,0,1,0,0,0
+México,2020,26 a 50 años de edad,76.0,4,0,1,0,0,0
+México,2021,26 a 50 años de edad,79.0,5,0,1,0,0,0
+México,2022,26 a 50 años de edad,82.0,6,0,1,0,0,0
+México,2016,51 a 65 años,54.0,0,0,0,1,0,0
+México,2017,51 a 65 años,58.0,1,0,0,1,0,0
+México,2018,51 a 65 años,58.0,2,0,0,1,0,0
+México,2019,51 a 65 años,67.0,3,0,0,1,0,0
+México,2020,51 a 65 años,68.0,4,0,0,1,0,0
+México,2021,51 a 65 años,72.0,5,0,0,1,0,0
+México,2022,51 a 65 años,75.0,6,0,0,1,0,0
+México,2016,66 años en adelante,39.0,0,0,0,0,1,0
+México,2017,66 años en adelante,41.0,1,0,0,0,1,0
+México,2018,66 años en adelante,41.0,2,0,0,0,1,0
+México,2019,66 años en adelante,48.0,3,0,0,0,1,0
+México,2020,66 años en adelante,52.0,4,0,0,0,1,0
+México,2021,66 años en adelante,55.0,5,0,0,0,1,0
+México,2022,66 años en adelante,57.0,6,0,0,0,1,0
+Panamá,2016,edad de medicion a 17 años,69.0,0,0,0,0,0,1
+Panamá,2017,edad de medicion a 17 años,72.0,1,0,0,0,0,1
+Panamá,2018,edad de medicion a 17 años,70.0,2,0,0,0,0,1
+Panamá,2019,edad de medicion a 17 años,73.0,3,0,0,0,0,1
+Panamá,2022,edad de medicion a 17 años,81.0,6,0,0,0,0,1
+Panamá,2016,18 a 25 años de edad,72.0,0,1,0,0,0,0
+Panamá,2017,18 a 25 años de edad,79.0,1,1,0,0,0,0
+Panamá,2018,18 a 25 años de edad,79.0,2,1,0,0,0,0
+Panamá,2019,18 a 25 años de edad,80.0,3,1,0,0,0,0
+Panamá,2022,18 a 25 años de edad,89.0,6,1,0,0,0,0
+Panamá,2016,26 a 50 años de edad,59.0,0,0,1,0,0,0
+Panamá,2017,26 a 50 años de edad,68.0,1,0,1,0,0,0
+Panamá,2018,26 a 50 años de edad,70.0,2,0,1,0,0,0
+Panamá,2019,26 a 50 años de edad,72.0,3,0,1,0,0,0
+Panamá,2022,26 a 50 años de edad,84.0,6,0,1,0,0,0
+Panamá,2016,51 a 65 años,36.0,0,0,0,1,0,0
+Panamá,2017,51 a 65 años,41.0,1,0,0,1,0,0
+Panamá,2018,51 a 65 años,49.0,2,0,0,1,0,0
+Panamá,2019,51 a 65 años,51.0,3,0,0,1,0,0
+Panamá,2022,51 a 65 años,73.0,6,0,0,1,0,0
+Panamá,2016,66 años en adelante,11.0,0,0,0,0,1,0
+Panamá,2017,66 años en adelante,14.0,1,0,0,0,1,0
+Panamá,2018,66 años en adelante,18.0,2,0,0,0,1,0
+Panamá,2019,66 años en adelante,20.0,3,0,0,0,1,0
+Panamá,2022,66 años en adelante,39.0,6,0,0,0,1,0
+Paraguay,2016,edad de medicion a 17 años,44.0,0,0,0,0,0,1
+Paraguay,2017,edad de medicion a 17 años,50.0,1,0,0,0,0,1
+Paraguay,2018,edad de medicion a 17 años,51.0,2,0,0,0,0,1
+Paraguay,2019,edad de medicion a 17 años,55.0,3,0,0,0,0,1
+Paraguay,2020,edad de medicion a 17 años,71.0,4,0,0,0,0,1
+Paraguay,2021,edad de medicion a 17 años,70.0,5,0,0,0,0,1
+Paraguay,2022,edad de medicion a 17 años,64.0,6,0,0,0,0,1
+Paraguay,2016,18 a 25 años de edad,81.0,0,1,0,0,0,0
+Paraguay,2017,18 a 25 años de edad,85.0,1,1,0,0,0,0
+Paraguay,2018,18 a 25 años de edad,88.0,2,1,0,0,0,0
+Paraguay,2019,18 a 25 años de edad,91.0,3,1,0,0,0,0
+Paraguay,2020,18 a 25 años de edad,90.0,4,1,0,0,0,0
+Paraguay,2021,18 a 25 años de edad,92.0,5,1,0,0,0,0
+Paraguay,2022,18 a 25 años de edad,91.0,6,1,0,0,0,0
+Paraguay,2016,26 a 50 años de edad,63.0,0,0,1,0,0,0
+Paraguay,2017,26 a 50 años de edad,73.0,1,0,1,0,0,0
+Paraguay,2018,26 a 50 años de edad,78.0,2,0,1,0,0,0
+Paraguay,2019,26 a 50 años de edad,82.0,3,0,1,0,0,0
+Paraguay,2020,26 a 50 años de edad,85.0,4,0,1,0,0,0
+Paraguay,2021,26 a 50 años de edad,89.0,5,0,1,0,0,0
+Paraguay,2022,26 a 50 años de edad,88.0,6,0,1,0,0,0
+Paraguay,2016,51 a 65 años,26.0,0,0,0,1,0,0
+Paraguay,2017,51 a 65 años,34.0,1,0,0,1,0,0
+Paraguay,2018,51 a 65 años,42.0,2,0,0,1,0,0
+Paraguay,2019,51 a 65 años,49.0,3,0,0,1,0,0
+Paraguay,2020,51 a 65 años,55.0,4,0,0,1,0,0
+Paraguay,2021,51 a 65 años,61.0,5,0,0,1,0,0
+Paraguay,2022,51 a 65 años,64.0,6,0,0,1,0,0
+Paraguay,2016,66 años en adelante,7.0,0,0,0,0,1,0
+Paraguay,2017,66 años en adelante,11.0,1,0,0,0,1,0
+Paraguay,2018,66 años en adelante,13.0,2,0,0,0,1,0
+Paraguay,2019,66 años en adelante,13.0,3,0,0,0,1,0
+Paraguay,2020,66 años en adelante,19.0,4,0,0,0,1,0
+Paraguay,2021,66 años en adelante,25.0,5,0,0,0,1,0
+Paraguay,2022,66 años en adelante,29.0,6,0,0,0,1,0
+Perú,2016,edad de medicion a 17 años,50.0,0,0,0,0,0,1
+Perú,2017,edad de medicion a 17 años,51.0,1,0,0,0,0,1
+Perú,2018,edad de medicion a 17 años,52.0,2,0,0,0,0,1
+Perú,2019,edad de medicion a 17 años,55.0,3,0,0,0,0,1
+Perú,2020,edad de medicion a 17 años,68.0,4,0,0,0,0,1
+Perú,2021,edad de medicion a 17 años,81.0,5,0,0,0,0,1
+Perú,2022,edad de medicion a 17 años,72.0,6,0,0,0,0,1
+Perú,2016,18 a 25 años de edad,75.0,0,1,0,0,0,0
+Perú,2017,18 a 25 años de edad,79.0,1,1,0,0,0,0
+Perú,2018,18 a 25 años de edad,82.0,2,1,0,0,0,0
+Perú,2019,18 a 25 años de edad,86.0,3,1,0,0,0,0
+Perú,2020,18 a 25 años de edad,87.0,4,1,0,0,0,0
+Perú,2021,18 a 25 años de edad,91.0,5,1,0,0,0,0
+Perú,2022,18 a 25 años de edad,93.0,6,1,0,0,0,0
+Perú,2016,26 a 50 años de edad,45.0,0,0,1,0,0,0
+Perú,2017,26 a 50 años de edad,50.0,1,0,1,0,0,0
+Perú,2018,26 a 50 años de edad,57.0,2,0,1,0,0,0
+Perú,2019,26 a 50 años de edad,63.0,3,0,1,0,0,0
+Perú,2020,26 a 50 años de edad,69.0,4,0,1,0,0,0
+Perú,2021,26 a 50 años de edad,76.0,5,0,1,0,0,0
+Perú,2022,26 a 50 años de edad,80.0,6,0,1,0,0,0
+Perú,2016,51 a 65 años,23.0,0,0,0,1,0,0
+Perú,2017,51 a 65 años,26.0,1,0,0,1,0,0
+Perú,2018,51 a 65 años,31.0,2,0,0,1,0,0
+Perú,2019,51 a 65 años,36.0,3,0,0,1,0,0
+Perú,2020,51 a 65 años,42.0,4,0,0,1,0,0
+Perú,2021,51 a 65 años,48.0,5,0,0,1,0,0
+Perú,2022,51 a 65 años,54.0,6,0,0,1,0,0
+Perú,2016,66 años en adelante,7.0,0,0,0,0,1,0
+Perú,2017,66 años en adelante,8.0,1,0,0,0,1,0
+Perú,2018,66 años en adelante,10.0,2,0,0,0,1,0
+Perú,2019,66 años en adelante,13.0,3,0,0,0,1,0
+Perú,2020,66 años en adelante,18.0,4,0,0,0,1,0
+Perú,2021,66 años en adelante,20.0,5,0,0,0,1,0
+Perú,2022,66 años en adelante,23.0,6,0,0,0,1,0
+Uruguay,2016,edad de medicion a 17 años,89.0,0,0,0,0,0,1
+Uruguay,2017,edad de medicion a 17 años,90.0,1,0,0,0,0,1
+Uruguay,2018,edad de medicion a 17 años,90.0,2,0,0,0,0,1
+Uruguay,2019,edad de medicion a 17 años,91.0,3,0,0,0,0,1
+Uruguay,2016,18 a 25 años de edad,90.0,0,1,0,0,0,0
+Uruguay,2017,18 a 25 años de edad,92.0,1,1,0,0,0,0
+Uruguay,2018,18 a 25 años de edad,95.0,2,1,0,0,0,0
+Uruguay,2019,18 a 25 años de edad,95.0,3,1,0,0,0,0
+Uruguay,2016,26 a 50 años de edad,81.0,0,0,1,0,0,0
+Uruguay,2017,26 a 50 años de edad,87.0,1,0,1,0,0,0
+Uruguay,2018,26 a 50 años de edad,91.0,2,0,1,0,0,0
+Uruguay,2019,26 a 50 años de edad,93.0,3,0,1,0,0,0
+Uruguay,2016,51 a 65 años,58.0,0,0,0,1,0,0
+Uruguay,2017,51 a 65 años,66.0,1,0,0,1,0,0
+Uruguay,2018,51 a 65 años,73.0,2,0,0,1,0,0
+Uruguay,2019,51 a 65 años,79.0,3,0,0,1,0,0
+Uruguay,2016,66 años en adelante,26.0,0,0,0,0,1,0
+Uruguay,2017,66 años en adelante,33.0,1,0,0,0,1,0
+Uruguay,2018,66 años en adelante,39.0,2,0,0,0,1,0
+Uruguay,2019,66 años en adelante,44.0,3,0,0,0,1,0
