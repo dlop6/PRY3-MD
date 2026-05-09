@@ -1,0 +1,154 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=2.5cm}
+\setlist[itemize]{itemsep=0.35em, topsep=0.35em}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+
+\title{Informe de Semana 2}
+\author{PRY3-MD}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Objetivo de la semana}
+
+El objetivo de la Semana 2 fue convertir el conjunto de datos original a un formato utilizable para machine learning, de acuerdo con el problema seleccionado en Semana 1: \textbf{predecir el porcentaje de uso de Internet por país, año y grupo etario}. El entregable debía incluir un CSV transformado, el notebook con la justificación de cada decisión y una validación de calidad del resultado final.
+
+\section{Descripción del conjunto de datos original}
+
+El dataset original contiene 870 filas y 8 columnas, con observaciones de uso de Internet en países seleccionados de América Latina y el Caribe entre 2000 y 2022. La unidad de análisis original combina país, año y grupo etario, con el porcentaje de personas usuarias de Internet como variable de interés.
+
+\begin{itemize}
+    \item \textbf{País}: dimensión geográfica.
+    \item \textbf{Año}: dimensión temporal.
+    \item \textbf{Grupo etario}: dimensión demográfica.
+    \item \textbf{Variable objetivo}: porcentaje de personas usuarias de Internet (\texttt{value}).
+\end{itemize}
+
+Además, el archivo incluye columnas de contexto como \texttt{indicator}, \texttt{unit}, \texttt{notes\_ids} y \texttt{source\_id}, útiles para trazabilidad, pero no directamente útiles como variables predictoras.
+
+\section{Diseño del dataset transformado}
+
+\subsection{Unidad de análisis}
+
+La unidad de análisis final es una observación disponible de \textbf{país, año y grupo etario}. Para Semana 2 se trabajó únicamente con el período \textbf{2016--2022}, ya que en Semana 1 se identificó que la cobertura y la consistencia mejoran de forma importante a partir de ese punto.
+
+\subsection{Estructura final propuesta}
+
+El dataset final conserva las variables base \texttt{pais}, \texttt{anio}, \texttt{years\_since\_2016} y \texttt{porcentaje\_internet}, y convierte el grupo etario en variables dummy. Esta estructura deja el CSV listo para modelos supervisados de regresión.
+
+\begin{itemize}
+    \item \texttt{pais}: país estandarizado.
+    \item \texttt{anio}: año del registro.
+    \item \texttt{years\_since\_2016}: variable temporal derivada.
+    \item \texttt{porcentaje\_internet}: variable objetivo.
+    \item \texttt{grupo\_*}: variables dummy del grupo etario.
+\end{itemize}
+
+\subsection{Por qué el formato original no era suficiente}
+
+El formato original es adecuado para exploración, pero no para regresión directa. La razón principal es que el modelo necesita una tabla donde las variables independientes estén en columnas y la variable objetivo quede claramente separada. Además, el dataset original contenía columnas constantes o vacías que no aportan señal predictiva.
+
+\begin{itemize}
+    \item No había una codificación numérica directa del grupo etario.
+    \item El año aparecía como dimensión y no como variable derivada de tendencia.
+    \item Varias columnas no aportaban variación útil para el aprendizaje automático.
+    \item Existía un panel incompleto que requería una decisión explícita sobre faltantes.
+\end{itemize}
+
+\section{Transformación realizada}
+
+La transformación se implementó en el notebook \texttt{notebooks/02\_semana2\_transformacion.ipynb}.
+
+\subsection{Pasos principales}
+
+\begin{enumerate}
+    \item Se cargó el dataset original desde \texttt{data/datos.csv}.
+    \item Se filtró el período 2016--2022.
+    \item Se excluyó el grupo \texttt{Total} para trabajar solo con grupos etarios específicos.
+    \item Se renombraron las columnas a nombres consistentes: \texttt{pais}, \texttt{anio}, \texttt{grupo\_etario} y \texttt{porcentaje\_internet}.
+    \item Se creó la variable temporal \texttt{years\_since\_2016}.
+    \item Se codificó el grupo etario con variables dummy.
+    \item Se ordenaron filas y columnas para asegurar consistencia en la exportación.
+    \item Se exportó el archivo final a \texttt{outputs/datos\_transformados\_semana2.csv}.
+\end{enumerate}
+
+\subsection{Resultado de la transformación}
+
+El dataset final quedó con 340 filas y 9 columnas, sin nulos explícitos ni duplicados por la clave natural \texttt{pais + anio + grupo\_etario}. El rango de \texttt{porcentaje\_internet} se mantiene entre 3 y 97, por lo que no se detectaron valores fuera de rango.
+
+\section{Validación de calidad}
+
+Se realizaron revisiones antes y después de la transformación para asegurar la calidad del archivo final.
+
+\begin{itemize}
+    \item \textbf{Nulos explícitos:} no se encontraron nulos en el dataset final.
+    \item \textbf{Duplicados:} no se detectaron duplicados completos ni por clave natural.
+    \item \textbf{Rangos:} el porcentaje de uso de Internet se mantiene entre 0 y 100.
+    \item \textbf{Tipos de dato:} las columnas finales tienen tipos coherentes con su función analítica.
+    \item \textbf{Coherencia del CSV:} el archivo exportado coincide exactamente con el dataset final construido en el notebook.
+\end{itemize}
+
+\subsection{Valores faltantes implícitos}
+
+Aunque el dataset final no tiene nulos explícitos, sí existe un faltante implícito en forma de panel incompleto. Al comparar todas las combinaciones posibles de país, año y grupo etario, se detectaron 115 combinaciones ausentes, equivalentes al 25.3\% del panel teórico.
+
+La ausencia no se imputó, porque refleja la cobertura real de la fuente y no un error de procesamiento. Esta decisión mantiene la integridad del dataset final y evita introducir valores artificiales.
+
+\section{Problemas de Data Mining considerados}
+
+\subsection{Problema seleccionado}
+
+El problema final sigue siendo una \textbf{regresión} para estimar el porcentaje de uso de Internet por país, año y grupo etario.
+
+\begin{itemize}
+    \item \textbf{Tipo de problema}: regresión.
+    \item \textbf{Variable objetivo}: \texttt{porcentaje\_internet}.
+    \item \textbf{Variables explicativas}: país, año, tendencia temporal y grupo etario codificado.
+\end{itemize}
+
+\subsection{Opción alternativa}
+
+Como alternativa conceptual, también se evaluó la posibilidad de clustering para agrupar países o grupos etarios por patrones de adopción. Sin embargo, no se eligió como objetivo principal porque no resuelve directamente la predicción del porcentaje ni permite validar con la misma claridad el entregable de Semana 2.
+
+\section{Justificación del diseño final}
+
+El diseño final es mejor que el formato original por cuatro razones principales:
+
+\begin{enumerate}
+    \item \textbf{Está listo para ML}: cada fila representa una observación independiente y las variables categóricas relevantes quedaron codificadas numéricamente.
+    \item \textbf{Captura tendencia temporal}: \texttt{years\_since\_2016} permite aprender la evolución del fenómeno sin depender solo del año como etiqueta.
+    \item \textbf{Reduce ruido}: se eliminaron columnas constantes o sin señal predictiva como \texttt{indicator}, \texttt{unit}, \texttt{notes\_ids} y \texttt{source\_id}.
+    \item \textbf{Mantiene la realidad del panel}: no se imputaron combinaciones ausentes que reflejan limitaciones reales de cobertura.
+\end{enumerate}
+
+\section{Entrega final de Semana 2}
+
+El cierre de la semana deja tres artefactos consistentes entre sí:
+
+\begin{itemize}
+    \item \textbf{Notebook final}: \texttt{notebooks/02\_semana2\_transformacion.ipynb}.
+    \item \textbf{CSV transformado}: \texttt{outputs/datos\_transformados\_semana2.csv}.
+    \item \textbf{Avances individuales}: \texttt{persona1\_avance\_semana2.md}, \texttt{persona2\_avance\_semana2.md} y \texttt{persona3\_avance\_semana2.md}.
+\end{itemize}
+
+La coherencia global es correcta: el notebook documenta el origen del dato, la transformación, la validación de calidad y la exportación final; el CSV responde al problema seleccionado; y los avances individuales resumen las tareas de cada integrante sin duplicar contenido largo.
+
+\section{Conclusión}
+
+Semana 2 convirtió un dataset descriptivo y desbalanceado en un archivo estructurado, consistente y listo para Semana 3. La transformación respeta el objetivo analítico definido en Semana 1, conserva las observaciones reales del período más confiable y deja explícitas las limitaciones del panel. Con esto, el proyecto queda listo para continuar con la siguiente etapa de modelado.
+
+\section{Respaldo técnico}
+
+El desarrollo completo de la transformación y validación se encuentra en el notebook \texttt{notebooks/02\_semana2\_transformacion.ipynb}, y el CSV final exportado en \texttt{outputs/datos\_transformados\_semana2.csv}.
+
+\end{document}
