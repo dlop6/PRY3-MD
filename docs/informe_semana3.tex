@@ -1,0 +1,100 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=2.5cm}
+\setlist[itemize]{itemsep=0.35em, topsep=0.35em}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+
+\title{Informe de Semana 3}
+\author{PRY3-MD}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Objetivo de la semana}
+
+El objetivo de la Semana 3 fue construir un primer experimento de modelado para estimar el porcentaje de uso de Internet por país, año y grupo etario. Esta etapa se enfocó en establecer baselines, comparar modelos de regresión y preparar una primera exportación de predicciones para evaluar el comportamiento inicial del problema.
+
+\section{Datos y partición}
+
+El modelado se realizó a partir del archivo transformado de la Semana 2, que ya estaba listo para machine learning. El conjunto final usa observaciones de \textbf{2016 a 2022} y conserva la variable objetivo \texttt{porcentaje\_internet} junto con las variables explicativas derivadas del país, el año y el grupo etario.
+
+\begin{itemize}
+    \item \textbf{Entrenamiento:} observaciones de 2016 a 2020.
+    \item \textbf{Prueba:} observaciones de 2021 a 2022.
+    \item \textbf{Cantidad de predicciones evaluadas:} 70 filas.
+\end{itemize}
+
+La separación temporal fue importante para evitar fuga de información y simular mejor un caso real de extrapolación hacia años más recientes.
+
+\section{Preparación de variables}
+
+El notebook \texttt{notebooks/03Semana3ModeladoInicial.ipynb} implementa una codificación sencilla para poder comparar modelos con distinto nivel de complejidad.
+
+\begin{itemize}
+    \item \texttt{pais} se codificó numéricamente para permitir su uso en modelos lineales y de árbol.
+    \item \texttt{years\_since\_2016} capturó la tendencia temporal.
+    \item Los grupos etarios se mantuvieron como variables binarias para conservar la diferencia demográfica.
+\end{itemize}
+
+Esta preparación permitió comparar modelos base sin introducir optimizaciones prematuras.
+
+\section{Modelos evaluados}
+
+Se entrenaron tres modelos de regresión como punto de partida:
+
+\begin{itemize}
+    \item \textbf{Regresión Lineal}: baseline simple para capturar una relación aproximadamente lineal entre variables y objetivo.
+    \item \textbf{Random Forest}: ensemble de árboles para modelar relaciones no lineales y dependencias más complejas.
+    \item \textbf{Gradient Boosting}: ensemble secuencial para corregir errores residuales de forma gradual.
+\end{itemize}
+
+\section{Resultados de evaluación}
+
+Los modelos se compararon con las métricas MAE, RMSE y R\textsuperscript{2} sobre el conjunto de prueba 2021--2022.
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Modelo} & \textbf{MAE (pp)} & \textbf{RMSE (pp)} & \textbf{R\textsuperscript{2}} \\
+\hline
+Regresi\'on Lineal & 8.35 & 10.60 & 0.732 \\
+Random Forest & 5.81 & 6.92 & 0.886 \\
+Gradient Boosting & \textbf{5.48} & 6.92 & 0.886 \\
+\hline
+\end{tabular}
+\end{center}
+
+El mejor modelo de baseline fue \textbf{Gradient Boosting}, porque obtuvo el MAE más bajo. Random Forest empató en RMSE y R\textsuperscript{2}, pero quedó ligeramente por detrás en error absoluto medio.
+
+\section{Análisis de error}
+
+El análisis de residuales mostró un patrón consistente de subestimación en los tres modelos, especialmente en el conjunto de prueba. Esto era esperable porque 2021--2022 contiene valores más altos que los observados durante el entrenamiento, y el crecimiento de adopción digital continúa fuera del rango visto por el modelo.
+
+\begin{itemize}
+    \item La Regresión Lineal fue el modelo menos estable, con el mayor error máximo observado.
+    \item Los modelos de ensemble redujeron la dispersión del error y mantuvieron mejor comportamiento global.
+    \item La importancia de variables mostró que \texttt{pais} y \texttt{years\_since\_2016} concentran la mayor señal predictiva.
+\end{itemize}
+
+\section{Exportación de resultados}
+
+Se generó el archivo \texttt{outputs/predicciones\_modelos\_semana3.csv} con las predicciones de los tres modelos sobre el conjunto de prueba. Este archivo sirve como respaldo para calcular métricas, revisar residuales y construir gráficas comparativas.
+
+\section{Conclusión}
+
+Semana 3 dejó un primer benchmark sólido para el problema de regresión. El experimento confirma que el fenómeno puede modelarse con buena capacidad explicativa y que las variables temporales y geográficas son determinantes. El siguiente paso natural es ajustar hiperparámetros, mejorar la codificación de variables y revisar si una partición temporal más fina mejora la generalización.
+
+\section{Respaldo técnico}
+
+El trabajo completo de esta semana se encuentra en \texttt{notebooks/03Semana3ModeladoInicial.ipynb}. Las predicciones exportadas están en \texttt{outputs/predicciones\_modelos\_semana3.csv}.
+
+\end{document}
