@@ -1,0 +1,139 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=2.5cm}
+\setlist[itemize]{itemsep=0.35em, topsep=0.35em}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+
+\title{Informe de Semana 4}
+\author{PRY3-MD}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Objetivo de la semana}
+
+El objetivo de la Semana 4 consistió en mejorar los modelos predictivos iniciales de la Semana 3 mediante un diseño robusto de validación cruzada temporal y el afinamiento sistemático de hiperparámetros. El fin principal fue seleccionar y justificar técnicamente el modelo de regresión final para la estimación del porcentaje de uso de internet por país, año y grupo etario.
+
+\section{Diseño de validación cruzada y control experimental}
+
+\subsection{Lógica de Partición Temporal}
+Para mantener coherencia y comparabilidad con los resultados previos, se conservó la estructura temporal de datos de la Semana 3:
+\begin{itemize}
+    \item \textbf{Conjunto de Desarrollo (2016--2020):} Utilizado para el entrenamiento y la validación cruzada temporal.
+    \item \textbf{Conjunto de Prueba Final (Hold-out Test, 2021--2022):} Aislado completamente durante la etapa de entrenamiento y sintonización de hiperparámetros. Se utiliza únicamente como la evaluación ciega final.
+\end{itemize}
+
+\subsection{Esquema de Validación Cruzada Temporal (Anti-Leakage)}
+El uso de validación cruzada aleatoria convencional (K-Fold) introduce una grave fuga de información (data leakage) al mezclar observaciones del pasado y del futuro en los mismos pliegues. Para evitar esto, se implementó un esquema de ventana expandida temporal (\texttt{TemporalExpandingWindowCV}) con 4 folds secuenciales:
+\begin{enumerate}
+    \item \textbf{Fold 1:} Entrena con 2016 (60 observaciones) y valida en 2017 (60 obs.).
+    \item \textbf{Fold 2:} Entrena con 2016--2017 (120 observaciones) y valida en 2018 (60 obs.).
+    \item \textbf{Fold 3:} Entrena con 2016--2018 (180 observaciones) y valida en 2019 (60 obs.).
+    \item \textbf{Fold 4:} Entrena con 2016--2019 (240 observaciones) y valida en 2020 (30 obs.).
+\end{enumerate}
+
+Este diseño asegura que el rendimiento reportado simule fielmente la capacidad del modelo para generalizar hacia periodos futuros.
+
+\section{Afinamiento de hiperparámetros}
+
+\subsection{Decisión sobre Regresión Lineal}
+La regresión lineal baseline de la Semana 3 obtuvo un error en validación cruzada muy elevado (CV MAE de $12.60 \pm 1.98$ pp), lo que representa más del doble del error de los modelos basados en árboles. Dado este pobre rendimiento estructural, se descartó el tuning de regularizaciones (como Ridge o Lasso) y se mantuvo como un baseline fijo de comparación.
+
+\subsection{Espacios de Búsqueda}
+Se utilizó \texttt{GridSearchCV} en combinación con \texttt{TemporalExpandingWindowCV} sobre los datos de desarrollo (2016--2020).
+\begin{itemize}
+    \item \textbf{Random Forest:} Se evaluaron 81 combinaciones optimizando MAE negativo. Parámetros: \texttt{n\_estimators} (50, 100, 200), \texttt{max\_depth} (None, 5, 10), \texttt{min\_samples\_leaf} (1, 2, 4) y \texttt{max\_features} (1.0, 'sqrt', 'log2').
+    \item \textbf{Gradient Boosting:} Se evaluaron 81 combinaciones. Parámetros: \texttt{n\_estimators} (50, 100, 200), \texttt{max\_depth} (2, 3, 5), \texttt{learning\_rate} (0.05, 0.1, 0.2) y \texttt{min\_samples\_leaf} (1, 2, 4).
+\end{itemize}
+
+\subsection{Mejores Hiperparámetros Encontrados}
+Los mejores hiperparámetros exportados a \texttt{mejores\_hiperparametros\_semana4.csv} fueron:
+\begin{itemize}
+    \item \textbf{Random Forest Optimizado:} \texttt{n\_estimators = 200}, \texttt{max\_depth = None}, \texttt{max\_features = 1.0}, \texttt{min\_samples\_leaf = 1}.
+    \item \textbf{Gradient Boosting Optimizado:} \texttt{n\_estimators = 200}, \texttt{max\_depth = 5}, \texttt{learning\_rate = 0.2}, \texttt{min\_samples\_leaf = 2}.
+\end{itemize}
+
+\section{Evaluación comparativa y resultados}
+
+El tuning produjo resultados divergentes según la arquitectura del algoritmo. Mientras que para Random Forest la mejora fue prácticamente nula debido a que los parámetros por defecto de scikit-learn ya eran óptimos (mejora en Test MAE de apenas $-0.14$ pp), para Gradient Boosting el ajuste de hiperparámetros redujo sustancialmente el error, bajando el Test MAE en $-0.51$ pp.
+
+La Tabla 1 muestra la comparación de los 5 modelos desarrollados en esta etapa.
+
+\begin{table}[h!]
+\centering
+\caption{Tabla comparativa final de modelos (CV vs Test)}
+\vspace{0.5em}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Modelo} & \textbf{Tipo} & \textbf{CV MAE (pp)} & \textbf{CV RMSE (pp)} & \textbf{CV R$^2$} & \textbf{Test MAE (pp)} & \textbf{Test RMSE (pp)} & \textbf{Test R$^2$} \\
+\midrule
+Regresión Lineal & Baseline & $12.60 \pm 1.98$ & $15.43 \pm 2.00$ & $0.617 \pm 0.053$ & $8.35$ & $10.60$ & $0.732$ \\
+Random Forest & Baseline & $6.28 \pm 1.71$ & $8.06 \pm 2.61$ & $0.888 \pm 0.064$ & $5.81$ & $6.92$ & $0.886$ \\
+RF Optimizado & Optimizado & $6.26 \pm 1.64$ & $8.14 \pm 2.62$ & $0.886 \pm 0.064$ & $5.67$ & $6.76$ & $0.891$ \\
+Gradient Boosting & Baseline & $6.21 \pm 1.16$ & $8.32 \pm 2.26$ & $0.882 \pm 0.055$ & $5.48$ & $6.92$ & $0.886$ \\
+\textbf{GB Optimizado} & \textbf{Optimizado} & \textbf{5.33 $\pm$ 1.17} & \textbf{7.51 $\pm$ 2.71} & \textbf{0.900 $\pm$ 0.063} & \textbf{4.97} & \textbf{6.11} & \textbf{0.911} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\section{Análisis de error y residuales (GB Optimizado)}
+
+Se analizó la distribución de los residuales ($Real - Predicho$) del mejor modelo (\textbf{Gradient Boosting Optimizado}) en el conjunto de prueba (2021--2022) para identificar posibles patrones sistemáticos de sesgo:
+\begin{itemize}
+    \item \textbf{Media de residuales:} $+4.57$ pp.
+    \item \textbf{Mediana de residuales:} $+4.14$ pp.
+    \item \textbf{Desviación estándar:} $4.06$ pp.
+    \item \textbf{Sesgo de subestimación:} $90.0\%$ de los casos muestran residuales positivos (el valor real es mayor a la predicción).
+\end{itemize}
+
+\subsection{Explicación del Sesgo e Impacto Histórico}
+Este fuerte sesgo de subestimación se explica por la evolución del contexto digital en América Latina. El modelo fue entrenado con observaciones de 2016 a 2020. Los años de prueba, 2021 y 2022, representan el periodo post-pandemia de COVID-19, el cual experimentó una aceleración masiva en la adopción tecnológica y el acceso a internet. Dado que los modelos basados en árboles no pueden extrapolar tendencias lineales más allá del rango máximo visto en las hojas del entrenamiento, las predicciones del modelo tienden a quedarse cortas frente al salto real del mercado. Sin embargo, el R$^2$ de 0.911 y la baja desviación estándar del error indican que el modelo sigue discriminando de manera excelente entre países y edades, manteniendo un error absoluto promedio muy bajo ($4.97$ pp).
+
+\subsection{Validación del Patrón de Subestimación de la Semana 3}
+En la Semana 3 se detectó que los modelos subestimaban sistemáticamente los valores altos de adopción de internet ($>70$ pp). Los análisis de la Semana 4 confirman que este comportamiento persiste de forma generalizada en los ensambles (el RF Optimizado subestima en el $92.9\%$ de los casos con una media residual de $+5.42$ pp). No obstante, el \textbf{GB Optimizado} reduce significativamente este sesgo en comparación con los otros modelos, disminuyendo la media residual a $+4.57$ pp y logrando una distribución de errores mucho más centrada y simétrica.
+
+\subsection{Análisis por Grupos Etarios y Países}
+El MAE del Gradient Boosting Optimizado varía sustancialmente por grupo demográfico y geográfico:
+\begin{itemize}
+    \item \textbf{Grupo Etario:} Los grupos de mayor adopción, como \texttt{18 a 25 años} y \texttt{26 a 50 años}, muestran errores pequeños. El error es notablemente más bajo que en el baseline. El grupo con mayor dispersión de error es el de adultos mayores (\texttt{66 años en adelante}).
+    \item \textbf{Geografía (País):} El MAE final es excelente en países con trayectorias más estables como Argentina ($3.42$ pp), Costa Rica ($3.69$ pp) y Colombia ($3.77$ pp). Por el contrario, el error es mayor en Panamá ($10.05$ pp) y Perú ($6.98$ pp), lo que señala países con dinámicas aceleradas o ruidosas que requerirán especial atención en la fase de despliegue.
+\end{itemize}
+
+\section{Propuesta de modelo final y conclusión}
+
+Se propone formalmente el \textbf{Gradient Boosting Optimizado} como el modelo final para el proyecto, con la siguiente configuración: \texttt{n\_estimators=200}, \texttt{max\_depth=5}, \texttt{learning\_rate=0.2}, \texttt{min\_samples\_leaf=2}.
+
+La decisión se respalda en la solidez del protocolo experimental:
+\begin{enumerate}
+    \item \textbf{Precisión Superior:} Obtuvo las mejores métricas en el hold-out test set (MAE = $4.97$ pp, RMSE = $6.11$ pp, R$^2$ = 0.911).
+    \item \textbf{Generalización Robusta:} La coincidencia entre la métrica de CV ($5.33$ pp) y la de Prueba ($4.97$ pp) demuestra que el modelo es estable y no padece de sobreajuste.
+    \item \textbf{Mitigación de Sesgo:} Presenta un menor sesgo sistemático de subestimación respecto a los baselines y al Random Forest optimizado.
+\end{enumerate}
+
+Este modelo queda seleccionado para la fase final de visualización e interpretación (Semana 5).
+
+\section{Respaldo técnico}
+
+El código fuente completo y los experimentos ejecutados se localizan en el notebook \texttt{notebooks/04Semana4MejoraSeleccion.ipynb}.
+Los archivos de datos exportados se encuentran en:
+\begin{itemize}
+    \item \texttt{outputs/mejores\_hiperparametros\_semana4.csv}: Parámetros seleccionados en GridSearchCV.
+    \item \texttt{outputs/predicciones\_modelo\_final\_semana4.csv}: Predicciones de prueba, residuales y errores absolutos por país y edad.
+    \item \texttt{outputs/figures/semana4/}: Figuras comparativas y de residuales generadas durante el análisis.
+\end{itemize}
+
+\end{document}
