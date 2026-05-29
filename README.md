@@ -4,38 +4,14 @@ Universidad del Valle de Guatemala | Semestre I 2026
 
 Javier Espana #23361 | Angel Esquit #23221 | Roberto Barreda #23354 | Diego Lopez #23747
 
-## Contexto
+Proyecto de mineria de datos para predecir el porcentaje de uso de Internet en America Latina y el Caribe por pais, ano y grupo etario (datos CEPALSTAT). Incluye transformacion del panel 2016-2022, modelado de regresion y seleccion del modelo final con validacion temporal.
 
-Este repositorio reúne los entregables del proyecto por semanas. El informe de la Semana 3 se agregó en [docs/informe_semana3.tex](docs/informe_semana3.tex).
+## Estructura del proyecto
 
-### Fragmento solicitado
+- data/: Archivos fuente en CSV con datos originales, metadatos y notas usadas en el analisis.
+- docs/: Informes semanales y final en PDF/TEX junto con la guia del proyecto.
+- notebooks/: Notebooks por semana para EDA, transformacion, modelado inicial y mejora/seleccion.
+- outputs/: Resultados generados (CSV de transformacion, predicciones, hiperparametros) y figuras.
+- presentacion_feria/: Material y figuras para la presentacion final en feria.
+- scripts/: Scripts auxiliares para tareas repetitivas o soporte del flujo.
 
-```python
-print ( " Negativo " )
-7
-8 # Operador ternario
-res = " Par " if x % 2 == 0 else " Impar "
-
-Bucles (For y While)
-1 # Bucle while
-2 while x > 0:
-3 x -= 1
-4
-5 # Bucle for con range ( inicio , fin , salto )
-6 for i in range (5) : # 0 , 1 , 2 , 3 , 4
-7 pass
-8
-9 for i in range (2 , 10 , 2) : # 2 , 4 , 6 , 8
-10 pass
-11
-12 for i in range (5 , 0 , -1) : # 5 , 4 , 3 , 2 , 1
-13 pass
-14
-15 # Control dentro de bucles
-16 for i in range (10) :
-17 if i == 5:
-18 break # Sale del bucle
-19 if i % 2 == 0:
-20 continue # Salta a la siguiente
-iteracion
-```
