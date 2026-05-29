@@ -1,0 +1,220 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{margin=2.5cm}
+\graphicspath{{../outputs/figures/semana4/}{outputs/figures/semana4/}}
+\setlist[itemize]{itemsep=0.35em, topsep=0.35em}
+\setlist[enumerate]{itemsep=0.35em, topsep=0.35em}
+
+\title{Informe Final del Proyecto PRY3-MD}
+\author{Angel Esteban Esquit Hern\'andez \and Roberto Jos\'e Barreda Siekavizza \and Javier Eduardo Espa\~na Pacheco \and Diego Javier L\'opez Reinoso}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Resumen ejecutivo}
+
+Este proyecto desarrolló un modelo de regresi\'on para estimar el porcentaje de uso de Internet por pa\'is, a\~no y grupo etario en Am\'erica Latina y el Caribe. A lo largo de las semanas se construy\'o primero una versi\'on exploratoria del problema, luego un conjunto de datos transformado apto para machine learning, despu\'es un benchmark inicial de modelos y finalmente un proceso de ajuste con validaci\'on cruzada temporal para seleccionar el modelo definitivo.
+
+El resultado final fue un \textbf{Gradient Boosting optimizado}. Su configuraci\'on seleccionada fue:
+
+\begin{itemize}
+    \item \texttt{n\_estimators=200}
+    \item \texttt{max\_depth=5}
+    \item \texttt{learning\_rate=0.2}
+    \item \texttt{min\_samples\_leaf=2}
+\end{itemize}
+
+En el conjunto de prueba temporal 2021--2022 obtuvo \textbf{MAE = 4.97 pp}, \textbf{RMSE = 6.11 pp} y \textbf{$R^2$ = 0.911}. El modelo generaliza bien dentro del rango hist\'orico observado, aunque mantiene una subestimaci\'on sistem\'atica en los a\~nos m\'as recientes debido al salto de adopci\'on digital posterior a 2020.
+
+\section{Problema anal\'itico}
+
+El objetivo del proyecto fue resolver un problema de \textbf{regresi\'on} sobre la variable continua porcentaje de uso de Internet. La unidad de an\'alisis corresponde a combinaciones de pa\'is, a\~no y grupo etario. Esta formulaci\'on es adecuada porque la variable objetivo es medible en escala continua, existe una tendencia temporal clara y el comportamiento difiere de forma consistente entre pa\'ses y grupos de edad.
+
+La decisi\'on anal\'itica se mantuvo estable durante todo el proyecto: predecir el porcentaje de personas usuarias de Internet a partir de variables geogr\'aficas, temporales y demogr\'aficas.
+
+\section{Datos y preparaci\'on}
+
+El conjunto original presenta observaciones para pa\'ses seleccionados de Am\'erica Latina y el Caribe, con cobertura desde 2000 hasta 2022. El an\'alisis exploratorio mostr\'o tres hallazgos relevantes:
+
+\begin{itemize}
+    \item La adopci\'on de Internet crece con fuerza en el tiempo y muestra una tendencia no lineal.
+    \item Existen diferencias marcadas entre pa\'ses, con algunos casos sistem\'aticamente por encima del resto.
+    \item La brecha generacional es persistente: los grupos j\'ovenes tienen valores de uso mucho m\'as altos que los adultos mayores.
+\end{itemize}
+
+Para llevar los datos a un formato compatible con aprendizaje supervisado se aplic\'o una transformaci\'on que dej\'o el archivo listo para modelado. La versi\'on final conserva \texttt{pais}, \texttt{anio}, \texttt{years\_since\_2016}, \texttt{porcentaje\_internet} y variables dummy del grupo etario. Adem\'as, se restringi\'o el an\'alisis al per\'iodo 2016--2022 por dos razones: la calidad de cobertura mejora de forma importante a partir de ese punto y el problema de predicci\'on se vuelve m\'as consistente cuando se evita el tramo m\'as ruidoso del panel.
+
+\section{Metodolog\'ia experimental}
+
+\subsection{Secuencia de trabajo}
+
+El proyecto se organiz\'o en cuatro etapas:
+
+\begin{enumerate}
+    \item \textbf{Exploraci\'on inicial:} caracterizaci\'on del comportamiento global, validaci\'on de cobertura y detecci\'on de patrones por pa\'is y grupo etario.
+    \item \textbf{Transformaci\'on:} preparaci\'on del dataset para machine learning, con codificaci\'on de categor\'ias y creaci\'on de variables derivadas.
+    \item \textbf{Modelado inicial:} comparaci\'on de regresi\'on lineal, Random Forest y Gradient Boosting como baselines.
+    \item \textbf{Mejora y selecci\'on:} afinamiento de hiperpar\'ametros y validaci\'on cruzada temporal para elegir el modelo final.
+\end{enumerate}
+
+\subsection{Validaci\'on temporal}
+
+Para evitar fuga de informaci\'on se us\'o una partici\'on temporal estricta. El entrenamiento se realiz\'o con 2016--2020 y la prueba final se reserv\'o para 2021--2022. Sobre el conjunto de desarrollo se implement\'o una validaci\'on cruzada de ventana expandida con cuatro folds secuenciales, de modo que cada validaci\'on simulara la predicci\'on de un per\'iodo futuro.
+
+Este punto es cr\'itico desde el criterio de ciencia de datos: en un problema con componente temporal, un split aleatorio puede inflar artificialmente el desempe\~no y producir conclusiones optimistas que no se sostienen al llevar el modelo a observaciones futuras.
+
+\subsection{Modelos evaluados}
+
+Se evaluaron cinco configuraciones:
+
+\begin{itemize}
+    \item Regresi\'on lineal como baseline simple.
+    \item Random Forest como ensamble de referencia.
+    \item Random Forest optimizado mediante Grid Search.
+    \item Gradient Boosting como baseline no lineal.
+    \item Gradient Boosting optimizado como modelo candidato final.
+\end{itemize}
+
+Las m\'etricas principales fueron MAE, RMSE y $R^2$, evaluadas en validaci\'on cruzada y en el hold-out test set temporal.
+
+\section{Resultados principales}
+
+La Tabla~\ref{tab:comparacion} resume el desempe\~no de los modelos.
+
+\begin{table}[h!]
+\centering
+\caption{Comparaci\'on final de modelos}
+\label{tab:comparacion}
+\vspace{0.5em}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Modelo} & \textbf{Tipo} & \textbf{CV MAE (pp)} & \textbf{CV RMSE (pp)} & \textbf{CV $R^2$} & \textbf{Test MAE (pp)} & \textbf{Test RMSE (pp)} & \textbf{Test $R^2$} \\
+\midrule
+Regresi\'on lineal & Baseline & $12.60 \pm 1.98$ & $15.43 \pm 2.00$ & $0.617 \pm 0.053$ & $8.35$ & $10.60$ & $0.732$ \\
+Random Forest & Baseline & $6.28 \pm 1.71$ & $8.06 \pm 2.61$ & $0.888 \pm 0.064$ & $5.81$ & $6.92$ & $0.886$ \\
+RF optimizado & Optimizado & $6.26 \pm 1.64$ & $8.14 \pm 2.62$ & $0.886 \pm 0.064$ & $5.67$ & $6.76$ & $0.891$ \\
+Gradient Boosting & Baseline & $6.21 \pm 1.16$ & $8.32 \pm 2.26$ & $0.882 \pm 0.055$ & $5.48$ & $6.92$ & $0.886$ \\
+\textbf{GB optimizado} & \textbf{Optimizado} & \textbf{$5.33 \pm 1.17$} & \textbf{$7.51 \pm 2.71$} & \textbf{$0.900 \pm 0.063$} & \textbf{$4.97$} & \textbf{$6.11$} & \textbf{$0.911$} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+El patr\'on es claro: la regresi\'on lineal no captura bien la no linealidad del problema, mientras que los ensambles de \'arboles reducen el error de forma importante. El mejor resultado lo obtuvo Gradient Boosting optimizado, que fue superior tanto en validaci\'on cruzada como en prueba final.
+
+\subsection{Par\'ametros seleccionados}
+
+Los mejores hiperpar\'ametros encontrados fueron:
+
+
+\begin{itemize}
+    \item \textbf{Random Forest:}
+    \begin{itemize}
+        \item \texttt{n\_estimators=200}
+        \item \texttt{max\_depth=None}
+        \item \texttt{max\_features=1.0}
+        \item \texttt{min\_samples\_leaf=1}
+    \end{itemize}
+    \item \textbf{Gradient Boosting:}
+    \begin{itemize}
+        \item \texttt{n\_estimators=200}
+        \item \texttt{max\_depth=5}
+        \item \texttt{learning\_rate=0.2}
+        \item \texttt{min\_samples\_leaf=2}
+    \end{itemize}
+\end{itemize}
+
+La ganancia del ajuste fue baja en Random Forest y alta en Gradient Boosting. Esto sugiere que la arquitectura de boosting ten\'ia m\'as capacidad de aprovechar una sintonizaci\'on fina del problema.
+
+\section{An\'alisis cient\'ifico de los errores}
+
+\subsection{Comportamiento global del modelo final}
+
+El Gradient Boosting optimizado obtuvo un error absoluto medio de 4.97 puntos porcentuales en prueba, con un $R^2$ de 0.911. En t\'erminos pr\'acticos, el modelo explica bien la variabilidad entre pa\'ises y grupos etarios y mantiene una desviaci\'on de error acotada.
+
+Sin embargo, el error no es completamente aleatorio. El an\'alisis de residuales mostr\'o:
+
+\begin{itemize}
+    \item media residual positiva de $+4.57$ pp,
+    \item mediana residual de $+4.14$ pp,
+    \item desviaci\'on est\'andar de $4.06$ pp,
+    \item subestimaci\'on en el 90\% de los casos.
+\end{itemize}
+
+Esto indica sesgo sistem\'atico hacia valores menores que los observados. Desde una perspectiva metodol\'ogica, el comportamiento es esperable: los modelos basados en \'arboles interpolan bien dentro del rango de entrenamiento, pero no extrapolan con facilidad cuando el per\'iodo futuro presenta una aceleraci\'on estructural como la observada tras la pandemia.
+
+\subsection{Interpretaci\'on de la subestimaci\'on}
+
+La direcci\'on del sesgo no se interpreta como un fallo aislado del algoritmo, sino como una tensi\'on entre la historia observada y el contexto futuro. El entrenamiento cubri\'o 2016--2020, mientras que la prueba incluy\'o 2021--2022. En ese tramo se registr\'o una adopci\'on digital m\'as acelerada, por lo que varios casos reales quedaron por encima de la capacidad de extrapolaci\'on del modelo.
+
+En otras palabras, el modelo no est\'a mal calibrado para el pasado; est\'a limitado para anticipar un cambio de r\'egimen. Esta lectura es importante porque evita confundir sesgo estructural con ruido aleatorio.
+
+\subsection{Desempe\~no por grupos y pa\'ises}
+
+Los errores no se distribuyen de manera homog\'enea. Los grupos etarios m\'as altos presentan mayor dispersi\'on, especialmente \texttt{66 a\~nos en adelante}, mientras que los grupos j\'ovenes son m\'as estables. A nivel geogr\'afico, el error fue m\'as bajo en pa\'ises con trayectorias m\'as estables como Argentina, Costa Rica y Colombia, y m\'as alto en pa\'ises con din\'amicas m\'as abruptas como Panam\'a y Per\'u.
+
+\section{Visualizaciones de apoyo}
+
+Las figuras generadas en la semana 4 respaldan la lectura estad\'istica del modelo final:
+
+\begin{itemize}
+    \item comparaci\'on global de MAE y RMSE entre modelos,
+    \item dispersi\'on de predicho versus real,
+    \item distribuci\'on de residuales,
+    \item an\'alisis de subestimaci\'on por grupos.
+\end{itemize}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig1_comparacion_mae_rmse.png}
+    \caption{Comparaci\'on de MAE y RMSE entre los modelos evaluados.}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig2_predicho_vs_real.png}
+    \caption{Relaci\'on entre valores reales y predichos por el modelo final.}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig3_residuales_gb_opt.png}
+    \caption{Distribuci\'on de residuales del Gradient Boosting optimizado.}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig4_subestimacion_y_grupos.png}
+    \caption{Patr\'on de subestimaci\'on por grupos etarios y pa\'ises.}
+\end{figure}
+
+\section{Conclusiones}
+
+El proyecto cumple el objetivo planteado: construir un modelo de regresi\'on capaz de estimar el porcentaje de uso de Internet con un desempe\~no alto y una interpretaci\'on t\'ecnica consistente.
+
+Las conclusiones principales son las siguientes:
+
+\begin{enumerate}
+    \item La variable objetivo tiene una estructura predictiva fuerte y claramente asociada a tiempo, pa\'is y edad.
+    \item La transformaci\'on del dataset fue necesaria para convertir un panel descriptivo en una tabla apta para machine learning.
+    \item La validaci\'on temporal fue indispensable para evitar sobreestimar el desempe\~no.
+    \item Gradient Boosting optimizado fue el mejor equilibrio entre error bajo, estabilidad y capacidad de generalizaci\'on.
+    \item El principal l\'imite del modelo no es la varianza, sino la extrapolaci\'on frente a un cambio de contexto hist\'orico.
+\end{enumerate}
+
+En t\'erminos de ciencia de datos, el modelo final es s\'olido para interpolar y para apoyar an\'alisis comparativos entre pa\'ises y grupos etarios, pero debe usarse con cautela si se pretende proyectar escenarios futuros fuera del patr\'on observado hasta 2020.
+
+\end{document}
